@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melhoria de Internet</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        max-width: 400px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+        margin-bottom: 30px;
+    }
+    p {
+        color: #555;
+        margin-bottom: 20px;
+    }
+    button {
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #numbers {
+        font-size: 24px;
+        margin-top: 20px;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Simulador de Melhoria de Internet</h1>
+    <p>Escolha qual interface melhorar:</p>
+    <button onclick="chooseInterface('dadosMoveis')">Dados Móveis</button>
+    <button onclick="chooseInterface('wifi')">Wi-Fi</button>
+    <div id="buttons" style="display: none; margin-top: 20px;">
+        <button id="activateButton" onclick="activateInternet()">Ativar</button>
+    </div>
+    <div id="numbers" style="display: none;"></div>
+</div>
+
+<script>
+    let interfaceEscolhida = '';
+    let internetAtivada = false;
+    let intervaloNumeros;
+
+    function chooseInterface(interface) {
+        interfaceEscolhida = interface;
+        document.getElementById('buttons').style.display = 'block';
+    }
+
+    function activateInternet() {
+        internetAtivada = !internetAtivada;
+        if (internetAtivada) {
+            document.getElementById('activateButton').textContent = 'Desativar';
+            document.getElementById('numbers').style.display = 'block';
+            startUpdatingNumbers();
+        } else {
+            document.getElementById('activateButton').textContent = 'Ativar';
+            document.getElementById('numbers').style.display = 'none';
+            clearInterval(intervaloNumeros);
+        }
+    }
+
+    function startUpdatingNumbers() {
+        intervaloNumeros = setInterval(() => {
+            let numeroAtual = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('numbers').textContent = `Frequência da Internet: ${numeroAtual} Hz`;
+        }, 1000);
+    }
+</script>
+</body>
+</html>
